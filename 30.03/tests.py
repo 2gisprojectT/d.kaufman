@@ -29,12 +29,11 @@ class testLeo(unittest.TestCase):
         #Лев сыт, подаем дерево
         self.l.data['status'] = 'full'
         self.assertEqual(self.l.diff_data('tree'), {'action' : 'see', 'status' : 'hungry'})
+        #Лев голоден, подаем дерево
         self.l.data['status'] = 'hungry'
         self.assertEqual(self.l.diff_data('tree'), {'action' : 'sleep', 'status' : 'hungry'})
 
-    #Тестируем input
-    def test_input_1(self):
-        self.l.inp()
+
 
 if __name__ == '__main__':
     unittest.main()
