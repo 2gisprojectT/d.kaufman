@@ -28,28 +28,20 @@ class leo():
         self.data = data
         self.diff = diff
     def inp(self):
-        #Сопоставления числа и входного значения - список допустимых введенных чисел
-        #К каждому входному параметру из второго поля соспоставлено число из первого, для удобства пользователя
-        comprasion = {   1 : 'antelope',
-                         2 : 'hunter',
-                         3 : 'tree',
-                         4 : 'exit'}
         #Продолжаем цикл, пока не введен корректо номер
         while True:
-            rez = input('Введите номер входного параметра:\n'
-                            '1) Антилопа\n'
-                            '2) Охотник\n'
-                            '3) Дерево\n'
-                            '4) Выход\n')
+            for key in diff.keys():
+                print(key)
+            rez = input("Your selection? (exit for end)\n")
+            #Если ничего не введено
             if len(rez) == 0:
-                 print('Вы не ввели номер\n')
+                 print("You don't select\n")
             else:
-                rez = int(rez)
-                r = comprasion.get(rez)
-                if r != None:
-                    return r
+                #Проверяем, верно ли ввели данные
+                if diff.get(rez) != None or rez == 'exit':
+                    return rez
                 else:
-                    print('Вы ввели неверный номер\n')
+                    print('You data is incorrect\n')
 
     def diff_data(self, object):
         #Если не надо менять статус, меняем только действие
@@ -64,7 +56,7 @@ class leo():
         rez = self.inp()
         while rez != 'exit':
             self.diff_data(rez)
-            print ('Новые значения:', self.data, '\n')
+            print ('New data:', self.data, '\n')
             rez = self.inp()
 
 
