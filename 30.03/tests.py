@@ -1,39 +1,36 @@
 __author__ = 'Дмитрий'
 import unittest
-import main
+from main import leo
 class testLeo(unittest.TestCase):
-    def setUp(self):
-        #Создадим льва и передадим ему таблицу изменений
-        self.l = main.leo({}, main.diff)
+    #Проверяем ситуацию, когда не надо менять статус
+    def test_constructor(self):
+        test_data = {'status' : 'status1', 'action' : 'action1'}
+        test_diff = {'obj1' : {'status1' : {'action' : 'action_diff', 'status' : 'null'}}}
+        self.l = leo(test_data, test_diff)
+        self.assertEqual(test_data, self.l.data)
+        self.assertEqual(test_diff, self.l.diff)
 
-    #Подаем на вход антилопу 2 раза: когда лев сыт и когда лев голоден
-    def test_antelope(self):
-        #Лев сыт, подаем антилопу
-        self.l.data['status'] = 'full'
-        self.assertEqual(self.l.diff_data('antelope'), {'action' : 'sleep', 'status' : 'hungry'})
-        #Лев голоден, подаем антилопу
-        self.l.data['status'] = 'hungry'
-        self.assertEqual(self.l.diff_data('antelope'), {'action' : 'eat', 'status' : 'full'})
+    #Тестируем ситуацию, когда не надо менять статус:
+    #Если в diff словаре поле status имеет значение null,
+    #то поле status не меняем
+    def test_diff_status_null(self):
+        test_object = 'test_object'
+        test_data = {'status' : 'status1', 'action' : 'action1'}
+        test_diff = {test_object : {'status1' : {'action' : 'action_diff', 'status' : 'null'}}}
+        self.l = leo(test_data, test_diff)
+        old_status = self.l.data['status']
+        self.l.diff_data(test_object)
+        self.assertEqual(old_status, self.l.data['status'])
 
-    #Тестируем действия льва при виде охотника
-    def test_hunter(self):
-        #Лев сыт подаем охотника
-        self.l.data['status'] = 'full'
-        self.assertEqual(self.l.diff_data('hunter'), {'action' : 'run', 'status' : 'hungry'})
-        #Лев голоден, подаем охотника
-        self.l.data['status'] = 'hungry'
-        self.assertEqual(self.l.diff_data('hunter'), {'action' : 'run', 'status' : 'hungry'})
-
-    #Действия льва при виде дерева
-    def test_tree(self):
-        #Лев сыт, подаем дерево
-        self.l.data['status'] = 'full'
-        self.assertEqual(self.l.diff_data('tree'), {'action' : 'see', 'status' : 'hungry'})
-        #Лев голоден, подаем дерево
-        self.l.data['status'] = 'hungry'
-        self.assertEqual(self.l.diff_data('tree'), {'action' : 'sleep', 'status' : 'hungry'})
-
-
+    #Проверяем корректность изменения l.data
+    def test_diff_data(self):
+        test_object = 'test_object'
+        test_data = {'status' : 'status1', 'action' : 'action1'}
+        test_diff = {test_object : {'status1' : {'action' : 'action_diff', 'status' : 'diff_status'}}}
+        self.l = leo(test_data, test_diff)
+        old_data = self.l.data
+        self.l.diff_data(test_object)
+        self.assertEqual(old_data, test_data[test_object])
 
 if __name__ == '__main__':
     unittest.main()
