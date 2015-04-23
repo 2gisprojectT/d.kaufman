@@ -59,6 +59,19 @@ class leo():
             print ('New data:', self.data, '\n')
             rez = self.inp()
 
+    def get_status(self):           #Получение статуса
+        return self.data['status']
+
+    def get_action(self):           #Получение действия
+        return self.data['action']
+
+    def set_diff_table(self, d):    #Установить таблицу изменений
+        self.diff = d
+
+    def get_diff_table(self):       #Получить таблицу изменений
+        return self.diff
+
+
 
 #l = leo(data, diff)
 #l.dialog()
