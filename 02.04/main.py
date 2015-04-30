@@ -38,19 +38,14 @@ class SeleniumTests(unittest.TestCase):
                                                  "/div[@class='ct-cs']/div[@class='vk_ans vk_bk']")
 
         #info.text на момент написания теста, имеет значение: "50.8026824 российских рубля"
-        #Получим целую часть числа следующим образом: найдем точку, сделаем срез строки от нуля до точки
-        i = 0
-        while True:
-            if info.text[i] != '.':
-                i = i + 1
-            else:
-                rez = int(info.text[0:i])
-                break
+        rez = float((info.text.split(' '))[0])
+
         #Проверим, что полученное значение больше a
         self.assertGreaterEqual(rez, a)
         #Проверим, что полученное значение меньше b
         self.assertLessEqual(rez, b)
 
+""""
     #Тест рейтинга фильма "мстители"
     #Тест проходит, если рейтинг меньше 8
     def testRating(self):
@@ -63,6 +58,6 @@ class SeleniumTests(unittest.TestCase):
                                                  "[@class='continue rating_link rating_ball_green']/span"
                                                  "[@class='rating_ball']")
         self.assertLess(float(data.text), 8)
-
+"""""
 if __name__ == '__main__':
     unittest.main()
