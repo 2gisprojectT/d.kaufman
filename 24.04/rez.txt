@@ -1,0 +1,52 @@
+
+TEST CASES
+case	empty	font	format	ref	files	pairings
+1	yes	yes	yes	yes	yes	10
+2	yes	no	no	no	no	10
+3	no	yes	no	yes	no	8
+4	no	no	yes	no	yes	8
+5	~yes	yes	yes	no	no	2
+6	~yes	no	no	yes	yes	2
+
+PAIRING DETAILS
+var1	var2	value1	value2	appearances	cases
+empty	font	yes	yes	2	1, 5
+empty	font	yes	no	2	2, 6
+empty	font	no	yes	1	3
+empty	font	no	no	1	4
+empty	format	yes	yes	2	1, 5
+empty	format	yes	no	2	2, 6
+empty	format	no	yes	1	4
+empty	format	no	no	1	3
+empty	ref	yes	yes	2	1, 6
+empty	ref	yes	no	2	2, 5
+empty	ref	no	yes	1	3
+empty	ref	no	no	1	4
+empty	files	yes	yes	2	1, 6
+empty	files	yes	no	2	2, 5
+empty	files	no	yes	1	4
+empty	files	no	no	1	3
+font	format	yes	yes	2	1, 5
+font	format	yes	no	1	3
+font	format	no	yes	1	4
+font	format	no	no	2	2, 6
+font	ref	yes	yes	2	1, 3
+font	ref	yes	no	1	5
+font	ref	no	yes	1	6
+font	ref	no	no	2	2, 4
+font	files	yes	yes	1	1
+font	files	yes	no	2	3, 5
+font	files	no	yes	2	4, 6
+font	files	no	no	1	2
+format	ref	yes	yes	1	1
+format	ref	yes	no	2	4, 5
+format	ref	no	yes	2	3, 6
+format	ref	no	no	1	2
+format	files	yes	yes	2	1, 4
+format	files	yes	no	1	5
+format	files	no	yes	1	6
+format	files	no	no	2	2, 3
+ref	files	yes	yes	2	1, 6
+ref	files	yes	no	1	3
+ref	files	no	yes	1	4
+ref	files	no	no	2	2, 5
